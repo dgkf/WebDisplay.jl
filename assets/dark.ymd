@@ -1,0 +1,3 @@
+<title>WebDisplay</title>
+[require](dark.scss)
+[require](main.coffee)

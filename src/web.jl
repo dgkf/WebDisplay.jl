@@ -3,6 +3,10 @@ import Restful.json
 
 const _web = Restful.app()
 
+_web.get("/") do req, res, route
+    res.html(read(joinpath(@__DIR__, "..", "assets", "main.html")))
+end
+
 _web.get("/hist", json) do req, res, route
     from = try parse(Int, req.params["from"]) catch e 1 end
     from > length(_display.hist) && wait(_display.cond)
