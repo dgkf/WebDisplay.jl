@@ -1,0 +1,7 @@
+name = "WebDisplay"
+uuid = "dddeb75b-f881-5cc0-ac7d-70edf6a556f0"
+version = "0.1.0"
+author = ["Zhang Shiwei <ylxdzsw@gmail.com>"]
+
+[deps]
+Restful = "a0979ab6-dee4-51c8-812d-69046455aaa6"
