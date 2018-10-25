@@ -1,4 +1,5 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <title>WebDisplay</title>
+[require](main.scss)
 [require](dark.scss)
 [require](main.coffee)

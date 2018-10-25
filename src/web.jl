@@ -4,7 +4,8 @@ import Restful.json
 const _web = Restful.app()
 
 _web.get("/") do req, res, route
-    res.html(read(joinpath(@__DIR__, "..", "assets", "main.html")))
+    theme = get(ENV, "WEB_DISPLAY_THEME", "light")
+    res.html(read(joinpath(@__DIR__, "..", "assets", "$theme.html")))
 end
 
 _web.get("/hist", json) do req, res, route

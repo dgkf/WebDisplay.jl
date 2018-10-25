@@ -1,0 +1,33 @@
+html {
+    font-family: monospace;
+    min-height: 100%;
+    min-width: 100%;
+    line-height: 1.4;
+}
+
+body > div {
+    position: relative;
+    padding-left: 5rem;
+    margin: 1rem;
+    min-height: 2.5rem;
+
+    & > div:nth-child(1) {
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        width: 4rem;
+        text-align: right;
+    }
+
+    & > div:nth-child(2) {
+        position: absolute;
+        left: 0;
+        top: 1.7rem;
+        width: 4rem;
+        text-align: right;
+    } 
+}
+
+pre {
+    padding-top: 0.2rem;
+}
