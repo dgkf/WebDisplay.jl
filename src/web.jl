@@ -2,10 +2,11 @@ using Restful
 import Restful.json
 
 const _web = Restful.app()
+const extra_header = Ref{String}()
 
 _web.get("/") do req, res, route
     theme = get(ENV, "WEB_DISPLAY_THEME", "light")
-    res.html(read(joinpath(@__DIR__, "..", "assets", "$theme.html")))
+    res.html(extra_header[] * read(joinpath(@__DIR__, "..", "assets", "$theme.html"), String))
 end
 
 _web.get("/hist", json) do req, res, route

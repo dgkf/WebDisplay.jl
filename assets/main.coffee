@@ -21,6 +21,21 @@ get_list = () ->
 ready = (div, id) -> ->
     div.querySelector('div').textContent = "[#{id}]"
     document.body.scrollTop = document.body.scrollHeight if follow and id is count
+    run_script div
+
+run_script = (node) ->
+    scripts = []
+
+    _collect = (node) -> for child in node.children
+        if child.tagName is 'SCRIPT' then scripts.push child else _collect child
+
+    _collect node
+
+    for script in scripts
+        el = document.createElement 'script'
+        src = script.getAttribute 'src'
+        if src then el.setAttribute 'src', src else el.innerHTML = script.innerHTML
+        script.parentElement.replaceChild el, script
 
 render = (id, div, type, cb) -> switch
     when type is 'text/html'
