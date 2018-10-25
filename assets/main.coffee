@@ -13,7 +13,10 @@ get_list = () ->
             """
             document.body.appendChild div
             render count, div, item, ready div, count
-        .finally -> setTimeout get_list, 0
+        .then -> setTimeout get_list, 0
+        .catch ->
+            console.error "Disconnected! This session won't reconnect, refresh if you want."
+            document.querySelector('#-f').outerHTML = ''
 
 ready = (div, id) -> ->
     div.querySelector('div').textContent = "[#{id}]"

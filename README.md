@@ -33,7 +33,7 @@ the default value is `0.0.0.0`, which means everyone can access your secret outp
 
 Sometimes you may want to store the precious results.
 
-- All data need to regenerate the webpage is in `WebDisplay._display.hist`, which can be saved in a file using [JLD2](https://github.com/JuliaIO/JLD2.jl).
+- All data needed to regenerate the webpage is in `WebDisplay._display.hist`, which can be saved in a file using [JLD2](https://github.com/JuliaIO/JLD2.jl).
 `_display` is immutable. To recover the webpage from your saved array `a`, you can run `x = WebDisplay._display.hist; resize!(x, length(a)); x[:] = a[:]`.
 - Alternatively, you can also save the webpage. [SingleFile](https://github.com/gildas-lormeau/SingleFile) is an excellent
 tool that can save the whole page into a single HTML file.
