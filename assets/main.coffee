@@ -1,4 +1,5 @@
 count = 0
+follow = true
 
 get_list = () ->
     fetch '/hist?from=' + (count + 1)
@@ -14,7 +15,9 @@ get_list = () ->
             render count, div, item, ready div, count
         .finally -> setTimeout get_list, 0
 
-ready = (div, id) -> -> div.querySelector('div').textContent = "[#{id}]"
+ready = (div, id) -> ->
+    div.querySelector('div').textContent = "[#{id}]"
+    document.body.scrollTop = document.body.scrollHeight if follow and id is count
 
 render = (id, div, type, cb) -> switch
     when type is 'text/html'
@@ -40,6 +43,12 @@ render = (id, div, type, cb) -> switch
         """
     else
         cb div.insertAdjacentText 'beforeend', "cannot render #{type} msg ##{id}"
+
+window.wd_tf = ->
+    follow = !follow
+    el = document.querySelector('#-f')
+    el.setAttribute 'title', "follow mode: #{if follow then 'on' else 'off'}"
+    if follow then el.classList.add 'active' else el.classList.remove 'active'
 
 window.wd_del = (button, id) ->
     button.parentElement.outerHTML = ''

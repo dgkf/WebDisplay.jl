@@ -3,3 +3,4 @@
 [require](main.scss)
 [require](dark.scss)
 [require](main.coffee)
+<button id="-f" class="active" title="follow mode: on" onclick="wd_tf()">-f</div>

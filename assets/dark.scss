@@ -2,3 +2,18 @@ html {
     background-color: #233;
     color: #fff;
 }
+
+code {
+    color: #ca2;
+}
+
+#-f {
+    border-color: #fff;
+
+    &.active {
+        border-color: transparent;
+        box-shadow: 0 0 2px 1px #ca2;
+
+        color: #ca2;
+    }
+}

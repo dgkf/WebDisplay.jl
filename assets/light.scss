@@ -1,3 +1,19 @@
 html {
+    background-color: #fff;
     color: #233;
+}
+
+code {
+    color: #b2a;
+}
+
+#-f {
+    border-color: #233;
+
+    &.active {
+        border-color: transparent;
+        box-shadow: 0 0 2px 1px #b2a;
+
+        color: #b2a;
+    }
 }
