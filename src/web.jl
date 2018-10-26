@@ -2,7 +2,7 @@ using Restful
 import Restful.json
 
 const _web = Restful.app()
-const extra_header = Ref{String}()
+const extra_header = Ref{String}("")
 
 _web.get("/") do req, res, route
     theme = get(ENV, "WEB_DISPLAY_THEME", "light")
