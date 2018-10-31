@@ -28,6 +28,7 @@ WebDisplay reads several environment variables. They can be set in shell or by r
 the default value is `0.0.0.0`, which means everyone can access your secret output.
 - `WEB_DISPLAY_PORT`: the TCP port to listen to. The default value is `rand(6000:9000)`.
 - `WEB_DISPLAY_THEME`: the web page CSS theme. Avaliable values: `light` (default) and `dark`.
+- `WEB_DISPLAY_NOTEXT`: do not catch "text/plain" displays if this variable exists.
 
 In addition, you can set a custom header for the webpage like the following example (this might change in the future). Refresh the webpage to take effect.
 

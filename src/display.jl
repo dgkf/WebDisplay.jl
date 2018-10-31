@@ -15,10 +15,11 @@ const web_displayable = map(MIME, [ # in "richness" order
 
 "this method choose argmax_richness{mime | showable(mime, x) && displayable(mime, d)}"
 function display(d::_WebDisplay, x)
-    for mime in web_displayable
+    for mime in web_displayable[1:end-1]
         showable(mime, x) && return display(d, mime, x)
     end
-    throw(MethodError(display, (d, x)))
+
+    "WEB_DISPLAY_NOTEXT" in keys(ENV) ? throw(MethodError(display, (d, x))) : display(d, MIME("text/plain"), x)
 end
 
 function tobytes(mime::MIME, x)
@@ -31,7 +32,7 @@ function display(d::_WebDisplay, mime::Union{map(typeof, web_displayable)...}, x
     @debug "displaying $mime" length(tobytes(mime, x))
     push!(d.hist, (string(mime), tobytes(mime, x)))
     notify(d.cond)
-    isinteractive() && println(stderr, "[shown at WebDisplay]")
+    isinteractive() && println(stderr, "[shown at WebDisplay #$(length(d.hist))]")
 end
 
 const _display = _WebDisplay([], Condition())
