@@ -17,7 +17,7 @@ julia> ] # this brings you to the `pkg>` prompt
 using WebDisplay
 ```
 
-Yes, you are done. Now values returned in the REPL are displayed at the printed link (it looks like `[ Info: WebDisplay listening on 0.0.0.0:6490`).
+Yes, you are done. Now values returned in the REPL are displayed at the printed link (it looks like `[ Info: WebDisplay listening on 0.0.0.0:6490`). You can still print things to the terminal by `println` or `@info`.
 
 ### Configuration
 
@@ -29,6 +29,15 @@ the default value is `0.0.0.0`, which means everyone can access your secret outp
 - `WEB_DISPLAY_PORT`: the TCP port to listen to. The default value is `rand(6000:9000)`.
 - `WEB_DISPLAY_THEME`: the web page CSS theme. Avaliable values: `light` (default) and `dark`.
 
+In addition, you can set a custom header for the webpage like the following example (this might change in the future). Refresh the webpage to take effect.
+
+```
+WebDisplay.extra_header[] = """
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+    <script src="http://echarts.baidu.com/asset/theme/dark.js"></script>
+"""
+```
+
 ### Save Results
 
 Sometimes you may want to store the precious results.
@@ -38,10 +47,6 @@ Sometimes you may want to store the precious results.
 - Alternatively, you can also save the webpage. [SingleFile](https://github.com/gildas-lormeau/SingleFile) is an excellent
 tool that can save the whole page into a single HTML file.
 - By the way, your REPL history is `a = Base.active_repl.interface.modes[1].hist; a.history[a.start_idx:end]`
-
-### My REPL do not work / no response / output disappears
-
-That's because all displays are redirected to the webpage. To print something to the terminal, you can use `println` or `@info`.
 
 ### Julia still trys to open browser / GTK window to show images
 
