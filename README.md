@@ -8,7 +8,7 @@ Display text, image, audio and videos in a web page. Probably the simplest appro
 WebDisplay.jl depends on Restful.jl, which is under developement. For maximum compatibility, we recommand install the
 tested version (#2877b87) with the following code.
 
-```julia
+```
 julia> ] # this brings you to the `pkg>` prompt
 (v1.0) pkg> add Restful#2877b87c0d97e9c83a60e44ed5144c3a
 (v1.0) pkg> add https://github.com/ylxdzsw/WebDisplay.jl
