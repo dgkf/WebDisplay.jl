@@ -10,7 +10,7 @@ _web.get("/") do req, res, route
 end
 
 _web.get("/hist", json) do req, res, route
-    from = try parse(Int, req.params["from"]) catch e 1 end
+    from = try parse(Int, req.params["from"]) catch; 1 end
     from > length(_display.hist) && wait(_display.cond)
 
     res.json(map(first, _display.hist[from:end]))
