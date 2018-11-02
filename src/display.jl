@@ -24,7 +24,7 @@ end
 
 function tobytes(mime::MIME, x)
     buf = IOBuffer()
-    show(IOContext(buf, :limit=>true), string(mime), x)
+    show(IOContext(buf, :limit=>true), mime, x)
     take!(buf)
 end
 
@@ -32,7 +32,7 @@ function display(d::_WebDisplay, mime::Union{map(typeof, web_displayable)...}, x
     @debug "displaying $mime" length(tobytes(mime, x))
     push!(d.hist, (string(mime), tobytes(mime, x)))
     notify(d.cond)
-    isinteractive() && println(stderr, "[shown at WebDisplay #$(length(d.hist))]")
+    isinteractive() && println(stderr, "[shown as $mime on WebDisplay #$(length(d.hist))]")
 end
 
 const _display = _WebDisplay([], Condition())
