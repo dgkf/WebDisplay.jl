@@ -1,8 +1,7 @@
 WebDisplay.jl
 =============
 
-Display text, image, audio and videos in a web page. Possibly the simplest approach to plot in a remote server if you
-just don't like Jupyter.
+Display text, image, audio and videos in a web page. Probably the simplest approach to plot in a remote server.
 
 ### Installation
 
@@ -43,11 +42,11 @@ WebDisplay.extra_header[] = """
 
 Sometimes you may want to store the precious results.
 
-- All data needed to regenerate the webpage is in `WebDisplay._display.hist`, which can be saved in a file using [JLD2](https://github.com/JuliaIO/JLD2.jl).
-`_display` is immutable. To recover the webpage from your saved array `a`, you can run `x = WebDisplay._display.hist; resize!(x, length(a)); x[:] = a[:]`.
+- All data needed to regenerate the webpage is in `WebDisplay._display.hist`, which can be saved into a file using [JLD2](https://github.com/JuliaIO/JLD2.jl).
+`_display` is immutable. To restore the webpage from your saved array `a`, you can run `x = WebDisplay._display.hist; resize!(x, length(a)); x[:] = a[:]`.
 - Alternatively, you can also save the webpage. [SingleFile](https://github.com/gildas-lormeau/SingleFile) is an excellent
 tool that can save the whole page into a single HTML file.
-- By the way, your REPL history is `a = Base.active_repl.interface.modes[1].hist; a.history[a.start_idx:end]`
+- By the way, your REPL history is `a = Base.active_repl.interface.modes[1].hist; a.history[a.start_idx:end]`.
 
 ### Julia still trys to open browser / GTK window to show images
 
