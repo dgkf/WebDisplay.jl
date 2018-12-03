@@ -5,7 +5,7 @@ Display text, image, audio and videos in a web page. Probably the simplest appro
 
 ### Installation
 
-WebDisplay.jl depends on Restful.jl, which is under developement. For maximum compatibility, we recommand install the
+`WebDisplay.jl` depends on `Restful.jl`, which is under developement. For maximum compatibility, we recommand install the
 tested version (#2877b87) with the following code.
 
 ```
@@ -20,7 +20,8 @@ julia> ] # this brings you to the `pkg>` prompt
 using WebDisplay
 ```
 
-Yes, you are done. Now values returned in the REPL are displayed at the printed link (it looks like `[ Info: WebDisplay listening on 0.0.0.0:6490`). You can still print things to the terminal by `println` or `@info`.
+Yes, you are done. Now values returned in the REPL are displayed at the printed link (it looks like `[ Info: WebDisplay listening on 0.0.0.0:6490`).
+You can still print things to the terminal by `println` or `@info`.
 
 ### Configuration
 
@@ -33,7 +34,7 @@ the default value is `0.0.0.0`, which means everyone can access your secret outp
 - `WEB_DISPLAY_THEME`: the web page CSS theme. Avaliable values: `light` (default) and `dark`.
 - `WEB_DISPLAY_NOTEXT`: do not catch "text/plain" displays if this variable exists.
 
-In addition, you can set a custom header for the webpage like the following example (this might change in the future). Refresh the webpage to take effect.
+In addition, you can set a custom header for the webpage like the following example. Refresh the webpage to take effect.
 
 ```
 WebDisplay.extra_header[] = """
@@ -42,17 +43,58 @@ WebDisplay.extra_header[] = """
 """
 ```
 
-### Save Results
+### Troubleshooting
 
-Sometimes you may want to store the precious results.
-
-- All data needed to regenerate the webpage is in `WebDisplay._display.hist`, which can be saved into a file using [JLD2](https://github.com/JuliaIO/JLD2.jl).
-`_display` is immutable. To restore the webpage from your saved array `a`, you can run `x = WebDisplay._display.hist; resize!(x, length(a)); x[:] = a[:]`.
-- Alternatively, you can also save the webpage. [SingleFile](https://github.com/gildas-lormeau/SingleFile) is an excellent
-tool that can save the whole page into a single HTML file.
-- By the way, your REPL history is `a = Base.active_repl.interface.modes[1].hist; a.history[a.start_idx:end]`.
-
-### Julia still trys to open browser / GTK window to show images
+#### Julia still trys to open browser / GTK window to show images
 
 Most likely because another package (like `Gadfly`) pushed another display into the stack. You can inspect the stack with
 `@info map(typeof, Base.Multimedia.displays)`. If `_WebDisplay` is not the *last* element, run `popdisplay()` until it is.
+
+### Snippets
+
+#### insert a document section
+
+````julia
+using Markdown # this is a stdlib so you already have
+
+md"""
+# Document section
+
+write something explanatory for the code
+
+```julia
+E = mc²
+```
+"""
+
+````
+
+#### Save Results
+
+save the history data for reproducing the webpage
+
+```julia
+using JLD2 # https://github.com/JuliaIO/JLD2.jl
+
+header = WebDisplay.extra_header[]
+hist = WebDisplay._display.hist
+
+# save REPL command history incase you need them in the future
+repl = Base.active_repl.interface.modes[1].hist
+repl_hist = repl.history[repl.start_idx:end]
+
+@save "hist.jld2" header hist repl_hist
+```
+
+load and restore
+
+```julia
+@load "hist.jld2" header hist
+
+WebDisplay.extra_header[] = header
+resize!(WebDisplay._display.hist, length(hist));
+WebDisplay._display.hist .= hist
+```
+
+Another approach is to save the generated webpage. [SingleFile](https://github.com/gildas-lormeau/SingleFile) is an
+excellent tool that can save the whole page into a single HTML file.
