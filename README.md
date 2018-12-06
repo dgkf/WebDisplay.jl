@@ -81,7 +81,7 @@ hist = WebDisplay._display.hist
 
 # save REPL command history incase you need them in the future
 repl = Base.active_repl.interface.modes[1].hist
-repl_hist = repl.history[repl.start_idx:end]
+repl_hist = repl.history[repl.start_idx+1:end]
 
 @save "hist.jld2" header hist repl_hist
 ```
