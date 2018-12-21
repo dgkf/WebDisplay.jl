@@ -1,4 +1,6 @@
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="icon" href="data:;base64,[icon]">
+[icon]= read("three-balls 32x32.png", "base64")
+
 <title>WebDisplay</title>
 [require](main.scss)
 [require](light.scss)

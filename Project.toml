@@ -1,7 +1,7 @@
 name = "WebDisplay"
 uuid = "dddeb75b-f881-5cc0-ac7d-70edf6a556f0"
 author = ["Zhang Shiwei <ylxdzsw@gmail.com>"]
-version = "1.0.0-rc2"
+version = "1.0.0"
 
 [deps]
 Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"

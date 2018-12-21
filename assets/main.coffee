@@ -20,7 +20,7 @@ get_list = () ->
 
 ready = (div, id) -> ->
     div.querySelector('div').textContent = "[#{id}]"
-    document.body.scrollTop = document.body.scrollHeight if follow and id is count
+    document.body.scrollTop = document.body.scrollHeight if follow and id is count and not ResizeObserver?
     run_script div
 
 run_script = (node) ->
@@ -74,4 +74,9 @@ window.wd_del = (button, id) ->
         .then (x) -> x.ok || Promise.reject x
         .catch (e) -> alert "deletion failed ##{id}"
 
-do get_list
+addEventListener 'load', ->
+    do get_list
+    
+    # fail if not supported
+    new ResizeObserver -> document.body.scrollTop = document.body.scrollHeight
+        .observe document.body
