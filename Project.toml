@@ -5,7 +5,7 @@ version = "1.0.0"
 
 [deps]
 Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
-Restful = "a0979ab6-dee4-51c8-812d-69046455aaa6"
+Restful = "15d41aa1-188b-503e-8332-9e5d3c62ee36"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

@@ -5,12 +5,9 @@ Display text, image, audio and videos in a web page. Probably the simplest appro
 
 ### Installation
 
-`WebDisplay.jl` depends on `Restful.jl`, which is under developement. For maximum compatibility, we recommand install the
-tested version with the following code.
-
 ```
 julia> ] # this brings you to the `pkg>` prompt
-(v1.0) pkg> add Restful#b84b54bac6987176d926abc1b319fd69
+(v1.0) pkg> add https://github.com/ylxdzsw/Restful.jl
 (v1.0) pkg> add https://github.com/ylxdzsw/WebDisplay.jl
 ```
 
