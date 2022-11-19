@@ -11,14 +11,7 @@ end)
 HTTP.register!(_router, "GET", "/assets/*", function(req::HTTP.Request) 
     path = URIs.URI(req.target).path
     fullpath = joinpath(@__DIR__, "..", splitpath(path)[2:end]...)
-    _, ext = splitext(fullpath)
-    if (ext == ".png")
-        return HTTP.Response(200, ["Content-Type" => "image/png"], tobytes(read(fullpath)))
-    elseif (ext == ".js")
-        return HTTP.Response(200, ["Content-Type" => "application/javascript"], read(fullpath, String))
-    elseif (ext == ".css")
-        return HTTP.Response(200, ["Content-Type" => "text/css"], read(fullpath, String))
-    end
+    HTTP.Response(200, ["Content-Type" => sniff_mime(fullpath)], read(fullpath))
 end)
 
 HTTP.register!(_router, "GET", "/next", function(req::HTTP.Request)

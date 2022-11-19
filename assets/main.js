@@ -15,6 +15,7 @@ async function next() {
 
   render(count, div, type, text)
   div.querySelector('div').textContent = "["+count+"]"
+  if (follow) { div.scrollIntoView({ behavior: "smooth" }) }
 
   setTimeout(next, 0)
 }
@@ -42,7 +43,7 @@ function render(id, div, type, content) {
       )
     }
     default: {
-      cb(div.insertAdjacentText('beforeend', "cannot render "+type+" msg #"+id))
+      return div.insertAdjacentText('beforeend', "cannot render "+type+" msg #"+id)
     }
   }
 }

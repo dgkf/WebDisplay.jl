@@ -1,6 +1,7 @@
 module WebDisplay
     using Logging
 
+    include("mime.jl")
     include("web.jl")
     include("display.jl")
 

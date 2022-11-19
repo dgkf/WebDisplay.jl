@@ -24,23 +24,30 @@ const web_displayable = map(MIME, [ # in "richness" order
     "audio/ogg", 
     "audio/webm",
     "application/pdf", 
-    "application/xhtml+xml"
+    "application/xhtml+xml",
+    "text/plain"
 ])
 
 function display(d::_WebDisplay, x)
-    for mime in web_displayable[1:end-1]
+    html = MIME("text/html")
+    plain = MIME("text/plain")
+
+    # only display if cannot be displayed as plain text
+    showable(html, x) && !showable(plain, x) && return display(d, html, x)
+
+    for mime in web_displayable[2:end-1]
         showable(mime, x) && return display(d, mime, x)
     end
 
-    if showable(MIME("text/plain"), x)
+    if showable(plain, x)
         if "WEB_DISPLAY_TEXT" in keys(ENV)
-            return display(d, MIME("text/plain"), x)
+            return display(d, plain, x)
         elseif !("WEB_DISPLAY_NOTEXT" in keys(ENV))
-            return display(stdout, MIME("text/plain"), x)
+            return display(stdout, plain, x)
         end
     end
 
-    display(stdout, MIME("text/plain"), x)
+    throw(MethodError(display, (d, x)))
 end
 
 function tobytes(mime::MIME, x)
