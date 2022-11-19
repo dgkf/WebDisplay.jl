@@ -6,7 +6,7 @@ get_list = () ->
         .then (x) -> x.json()
         .then (list) -> for item in list
             count += 1
-            continue if item is ''
+            continue if item is not ''
             div = document.createElement 'div'
             div.innerHTML = """
                 <div>[...]</div> <div onclick="wd_del(this, #{count})">[X]</div>

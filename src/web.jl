@@ -1,33 +1,31 @@
-using Restful
-import Restful.json
+using HTTP, JSON3, URIs
 
-const _web = Restful.app()
 const extra_header = Ref{String}("")
 
-_web.get("/") do req, res, route
+_router = HTTP.Router()
+HTTP.register!(_router, "GET", "/", function(req::HTTP.Request) 
     theme = get(ENV, "WEB_DISPLAY_THEME", "light")
-    res.html(extra_header[] * read(joinpath(@__DIR__, "..", "assets", "$theme.html"), String))
-end
+    HTTP.Response(200, read(joinpath(@__DIR__, "..", "assets", "$theme.html"), String))
+end)
 
-_web.get("/hist", json) do req, res, route
-    from = try parse(Int, req.params["from"]) catch; 1 end
-    from > length(_display.hist) && wait(_display.cond)
+HTTP.register!(_router, "GET", "/assets/*", function(req::HTTP.Request) 
+    path = URIs.URI(req.target).path
+    fullpath = joinpath(@__DIR__, "..", splitpath(path)[2:end]...)
+    _, ext = splitext(fullpath)
+    if (ext == ".png")
+        return HTTP.Response(200, ["Content-Type" => "image/png"], tobytes(read(fullpath)))
+    elseif (ext == ".js")
+        return HTTP.Response(200, ["Content-Type" => "application/javascript"], read(fullpath, String))
+    elseif (ext == ".css")
+        return HTTP.Response(200, ["Content-Type" => "text/css"], read(fullpath, String))
+    end
+end)
 
-    res.json(map(first, _display.hist[from:end]))
-end
-
-_web.get("/hist/:id") do req, res, route
-    id = parse(Int, route.id)
-    id > length(_display.hist) && return res.code(404)
-
-    res.status = 200
-    res.content_type, res.body = _display.hist[id]
-end
-
-_web.delete("/hist/:id") do req, res, route
-    id = parse(Int, route.id)
-    id > length(_display.hist) && return res.code(404)
-
-    _display.hist[id] = ("", UInt8[])
-    res.code(200)
-end
+HTTP.register!(_router, "GET", "/next", function(req::HTTP.Request)
+    wait(_display.cond)
+    HTTP.Response(
+        200,
+        ["Content-Type" => string(_display.content_type)],
+        _display.content
+    )
+end)
