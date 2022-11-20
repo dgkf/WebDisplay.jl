@@ -1,8 +1,0 @@
-<link rel="icon" href="data:;base64,[icon]">
-[icon]= read("three-balls 32x32.png", "base64")
-
-<title>WebDisplay</title>
-[require](main.scss)
-[require](dark.scss)
-[require](main.coffee)
-<button id="-f" class="active" title="follow mode: on" onclick="wd_tf()">-f</div>

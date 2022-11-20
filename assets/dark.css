@@ -9,11 +9,11 @@ code {
 
 #-f {
     border-color: #fff;
+}
 
-    &.active {
-        border-color: transparent;
-        box-shadow: 0 0 2px 1px #ca2;
+#-f.active {
+    border-color: transparent;
+    box-shadow: 0 0 2px 1px #ca2;
 
-        color: #ca2;
-    }
+    color: #ca2;
 }

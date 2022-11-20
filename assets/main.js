@@ -1,6 +1,5 @@
-_last = null
 count = 0
-follow = true
+outputs = []
 
 async function next() {
   const res = await fetch("/next");
@@ -15,7 +14,6 @@ async function next() {
 
   render(count, div, type, text)
   div.querySelector('div').textContent = "["+count+"]"
-  if (follow) { div.scrollIntoView({ behavior: "smooth" }) }
 
   setTimeout(next, 0)
 }
@@ -45,17 +43,6 @@ function render(id, div, type, content) {
     default: {
       return div.insertAdjacentText('beforeend', "cannot render "+type+" msg #"+id)
     }
-  }
-}
-
-function wd_tf() {
-  follow = !follow
-  el = document.querySelector('#-f')
-  el.setAttribute('title', "follow mode: " + (follow ? 'on' : 'off'))
-  if (follow) {
-    el.classList.add('active') 
-  } else {
-    el.classList.remove('active')
   }
 }
 

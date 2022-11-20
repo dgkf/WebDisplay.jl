@@ -1,53 +1,69 @@
 html {
-    font-family: monospace;
-    min-height: 100%;
-    min-width: 100%;
-    line-height: 1.4;
+  font-family: monospace;
+  min-height: 100%;
+  min-width: 100%;
+  line-height: 1.4;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
-body > div {
-    position: relative;
-    padding-left: 5rem;
-    margin: 1rem 0;
-    min-height: 2.5rem;
+body > #main {
+  display: flex;
+  height: 100vh;
 }
 
-body > div > div:nth-child(1) {
-    position: absolute;
-    left: 0;
-    width: 4rem;
-    text-align: right;
+#display-pane {
+  background: #EEE;
+  flex: 1;
+  height: 100%;
 }
 
-body > div > div:nth-child(2) {
-    position: absolute;
-    left: 0;
-    top: 1.5rem;
-    width: 4rem;
-    text-align: right;
+#thumbnail-pane {
+  position: relative;
+  background: #DDD;
+  flex: auto;
+  height: 100%;
+}
+
+#thumbnail-pane.thumbnail-visible {
+  min-width: 200px;
+  max-width: 20%;
+}
+
+#menu {
+  position: absolute;
+  right: 100%;
+  bottom: 2rem;
+
+  background: #DDD;
+  border-radius: 5rem 0 0 5rem;
+  padding: 2rem 1rem 2rem 2rem;
+}
+
+#toggle-thumbnail {
+  background: none;
+  border: none;
 }
 
 #-f {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-    z-index: 1;
-    background-color: transparent;
-    border-radius: 50%;
-    color: inherit;
-    font-family: monospace;
-    font-size: 1.4rem;
-    border: 1px solid;
-    opacity: 0.6;
-    transition: opacity 500ms;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  z-index: 1;
+  background-color: transparent;
+  border-radius: 50%;
+  color: inherit;
+  font-family: monospace;
+  font-size: 1.4rem;
+  border: 1px solid;
+  opacity: 0.6;
+  transition: opacity 500ms;
 }
 
 #-f:hover {
-    opacity: 1;
+  opacity: 1;
 }
