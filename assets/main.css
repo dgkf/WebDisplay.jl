@@ -12,6 +12,7 @@ body {
 body > #main {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 #display-pane {
@@ -23,13 +24,30 @@ body > #main {
 #thumbnail-pane {
   position: relative;
   background: #DDD;
-  flex: auto;
+  flex: 0;
   height: 100%;
+
+  max-width: 20%;
+  min-width: 0;
+
+  translate: 100%;
+  transition: translate 2s, min-width 0s ease 2s;
 }
 
 #thumbnail-pane.thumbnail-visible {
+  flex: 0;
   min-width: 200px;
-  max-width: 20%;
+  translate: 0%
+}
+
+#thumbnail-pane .thumbnail {
+  width: calc(100% - 3rem);
+  margin: 1.5rem auto 0rem auto;
+}
+
+#thumbnail-pane img {
+  background: #BBB;
+  width: 100%;
 }
 
 #menu {
